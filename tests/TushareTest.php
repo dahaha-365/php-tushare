@@ -21,10 +21,8 @@ final class TushareTest extends TestCase {
 	}
 
 	public function testCanGetData(): void {
-		if ($this->tushare === null) {
-			$this->testCanInit();
-		}
-		$data = $this->tushare->exec('daily', [
+		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$data = $tushare->exec('daily', [
 			'ts_code' => '000001.SZ',
 			'start_date' => '20180301',
 			'end_date' => '20180401',
@@ -33,18 +31,29 @@ final class TushareTest extends TestCase {
 	}
 
 	public function testCatchApiError(): void {
-		if ($this->tushare === null) {
-			$this->testCanInit();
-		}
-		$this->tushare->exec('test_api_error');
-		$this->assertNotEmpty($this->tushare->error);
+		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$tushare->exec('test_api_error');
+		$this->assertNotEmpty($tushare->error);
 	}
 
 	public function testCatchCurlError(): void {
-		if ($this->tushare === null) {
-			$this->testCanInit();
-		}
-		$this->tushare->exec('test_api_error');
-		$this->assertNotEmpty($this->tushare->error);
+		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$tushare::$curl_options = [
+			CURLOPT_PROXY => 999999999999999,
+		];
+		$tushare->exec('daily', [
+			'ts_code' => '000001.SZ',
+			'start_date' => '20180301',
+			'end_date' => '20180401',
+		]);
+		$this->assertNotEmpty($tushare->error);
+	}
+
+	public function testCatchJsonError(): void {
+		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$tushare->exec('');
+		curl_setopt($tushare::$curl, CURLOPT_URL, 'https://www.baidu.com');
+		$tushare->exec('');
+		$this->assertNotEmpty($tushare->error);
 	}
 }

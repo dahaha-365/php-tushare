@@ -59,10 +59,11 @@ class Tushare {
 	protected function initCurl(array $options = []) {
 		if (self::$curl === null) {
 			self::$curl = curl_init();
+			curl_setopt_array(self::$curl, self::$curl_options + $options);
+			curl_setopt(self::$curl, CURLOPT_POST, true);
+			curl_setopt(self::$curl, CURLOPT_URL, 'http://api.tushare.pro/');
+			curl_setopt(self::$curl, CURLOPT_RETURNTRANSFER, true);
 		}
-		curl_setopt_array(self::$curl, array_merge(self::$curl_options, $options));
-		curl_setopt(self::$curl, CURLOPT_POST, true);
-		curl_setopt(self::$curl, CURLOPT_URL, 'http://api.tushare.pro/');
 	}
 
 	/**
@@ -85,7 +86,6 @@ class Tushare {
 				'Content-Type: application/json',
 				'Content-Length: ' . strlen($payload))
 		);
-		curl_setopt(self::$curl, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec(self::$curl);
 		if (curl_errno(self::$curl)) {
 			$this->error = [
