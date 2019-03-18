@@ -1,6 +1,6 @@
 # php-tushare [![Build Status](https://travis-ci.org/CantonBolo/php-tushare.svg?branch=master)](https://travis-ci.org/CantonBolo/php-tushare)
 
-[Tushare Pro](https://tushare.pro) PHP SDK
+[Tushare Pro](https://tushare.pro/register?reg=245045) 金融大数据平台 PHP SDK
 
 # 安装
 
