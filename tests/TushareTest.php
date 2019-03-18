@@ -19,12 +19,8 @@ final class TushareTest extends TestCase {
 		if ($this->tushare === null) {
 			$this->testCanInit();
 		}
-		$data = $this->tushare->exec('daily', [
-			'ts_code' => '000001.SZ',
-			'start_date' => '20180301',
-			'end_date' => '20180401',
-		]);
-		$this->assertArrayHasKey('code', $data);
+		$data = $this->tushare->exec('test_error');
+		$this->assertNotEmpty($data['request_id']);
 	}
 
 	public function testCanCatchError(): void {
