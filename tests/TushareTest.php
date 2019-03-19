@@ -57,6 +57,10 @@ final class TushareTest extends TestCase {
 
 	public function testCatchJsonError(): void {
 		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$tushare::$curlOptions = [
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false,
+		];
 		$tushare->exec('');
 		curl_setopt($tushare::$curl, CURLOPT_URL, 'https://www.baidu.com');
 		$tushare->exec('');
