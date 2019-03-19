@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CantonBolo/php-tushare.svg?branch=master)](https://travis-ci.org/CantonBolo/php-tushare)
 [![codecov](https://codecov.io/gh/CantonBolo/php-tushare/branch/master/graph/badge.svg)](https://codecov.io/gh/CantonBolo/php-tushare)
+[![StyleCI](https://github.styleci.io/repos/176181004/shield?branch=master)](https://github.styleci.io/repos/176181004)
 
 [Tushare Pro](https://tushare.pro/register?reg=245045) 金融大数据平台 PHP SDK
 
