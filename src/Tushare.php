@@ -10,9 +10,11 @@ class Tushare {
 
 	static $curl = null;
 
-	public static $curl_options = [];
+	public static $curlOptions = [];
 
 	public $error = [];
+
+	public $rawResult = '';
 
 	public $result = [];
 
@@ -59,7 +61,7 @@ class Tushare {
 	protected function initCurl(array $options = []) {
 		if (self::$curl === null) {
 			self::$curl = curl_init();
-			curl_setopt_array(self::$curl, self::$curl_options + $options);
+			curl_setopt_array(self::$curl, self::$curlOptions + $options);
 			curl_setopt(self::$curl, CURLOPT_POST, true);
 			curl_setopt(self::$curl, CURLOPT_URL, 'http://api.tushare.pro/');
 			curl_setopt(self::$curl, CURLOPT_RETURNTRANSFER, true);
@@ -94,6 +96,7 @@ class Tushare {
 			];
 			return false;
 		}
+		$this->rawResult = $result;
 		$result = json_decode($result, true);
 		if (json_last_error() !== JSON_ERROR_NONE) {
 			$this->error = [
@@ -110,6 +113,6 @@ class Tushare {
 			];
 		}
 		$this->result = $result;
-		return $result;
+		return $this;
 	}
 }

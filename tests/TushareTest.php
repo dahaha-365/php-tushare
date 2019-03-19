@@ -22,23 +22,29 @@ final class TushareTest extends TestCase {
 
 	public function testCanGetData(): void {
 		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$tushare::$curlOptions = [
+			CURLOPT_PROXY => null,
+		];
 		$data = $tushare->exec('daily', [
 			'ts_code' => '000001.SZ',
 			'start_date' => '20180301',
 			'end_date' => '20180401',
-		]);
+		])->result;
 		$this->assertNotEmpty($data['request_id']);
 	}
 
 	public function testCatchApiError(): void {
 		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
+		$tushare::$curlOptions = [
+			CURLOPT_PROXY => null,
+		];
 		$tushare->exec('test_api_error');
 		$this->assertNotEmpty($tushare->error);
 	}
 
 	public function testCatchCurlError(): void {
 		$tushare = new Tushare(strval(getenv('TUSHARE_TOKEN')));
-		$tushare::$curl_options = [
+		$tushare::$curlOptions = [
 			CURLOPT_PROXY => 999999999999999,
 		];
 		$tushare->exec('daily', [
