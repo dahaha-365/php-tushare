@@ -1,5 +1,6 @@
 # php-tushare
 
+![GitHub](https://img.shields.io/github/license/cantonbolo/php-tushare.svg)
 [![Build Status](https://travis-ci.org/CantonBolo/php-tushare.svg?branch=master)](https://travis-ci.org/CantonBolo/php-tushare)
 [![codecov](https://codecov.io/gh/CantonBolo/php-tushare/branch/master/graph/badge.svg)](https://codecov.io/gh/CantonBolo/php-tushare)
 [![StyleCI](https://github.styleci.io/repos/176181004/shield?branch=master)](https://github.styleci.io/repos/176181004)
